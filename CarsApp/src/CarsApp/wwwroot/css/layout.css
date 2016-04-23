@@ -5,3 +5,34 @@
     margin:auto;
     width:300px;
 }
+
+.list-add{
+    margin:10px 0;
+}
+
+.list{
+    margin:10px 0;
+}
+
+.list-header{
+    background: #808080; 
+}
+
+.list-body{
+}
+
+.list-row{
+}
+
+.list-row:nth-child(even) { 
+    background: #e1e1e1;
+}
+
+.list-cell{
+    overflow:hidden;
+    display:inline-block;
+}
+
+.modal-error{
+    color: red;
+}

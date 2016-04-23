@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.Data.Entity;
 
 namespace CarsApp.Services.DataBase.Concrete
 {
@@ -11,7 +12,8 @@ namespace CarsApp.Services.DataBase.Concrete
 
         public IEnumerable<Car> GetCars()
         {
-            return appDBContext.Cars.ToList();
+            var cars = appDBContext.Cars.Include(x => x.Driver).ToList();
+            return cars;
         }
         public void AddCar(Car car)
         {
@@ -20,14 +22,14 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public Car GetCar(int id)
         {
-            return appDBContext.Cars.Where(x => x.ID == id).FirstOrDefault();
+            return appDBContext.Cars.Where(x => x.ID == id).Include(x => x.Driver).FirstOrDefault();
         }
         public bool UpdateCar(Car car)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).FirstOrDefault();
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).Include(x => x.Driver).FirstOrDefault();
             if (dbEntry != null)
             {
-                dbEntry.Driver = car.Driver;
+                dbEntry.DriverID = car.DriverID;
                 dbEntry.Year = car.Year;
                 dbEntry.Description = car.Description;
                 appDBContext.SaveChanges();
@@ -37,7 +39,7 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public bool DeleteCar(int id)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).FirstOrDefault();
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).Include(x => x.Driver).FirstOrDefault();
             if (dbEntry != null)
             {
                 appDBContext.Cars.Remove(dbEntry);
@@ -51,7 +53,7 @@ namespace CarsApp.Services.DataBase.Concrete
 
         public IEnumerable<Driver> GetDrivers()
         {
-            return appDBContext.Drivers;
+            return appDBContext.Drivers.Include(x => x.Cars).ToList();
         }
         public void AddDriver(Driver driver)
         {
@@ -60,15 +62,14 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public Driver GetDriver(int id)
         {
-            return appDBContext.Drivers.Where(x => x.ID == id).FirstOrDefault();
+            return appDBContext.Drivers.Where(x => x.ID == id).Include(x => x.Cars).FirstOrDefault();
         }
         public bool UpdateDriver(Driver driver)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).FirstOrDefault();
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).Include(x => x.Cars).FirstOrDefault();
             if (dbEntry != null)
             {
                 dbEntry.Name = driver.Name;
-                dbEntry.Cars = driver.Cars;
                 appDBContext.SaveChanges();
                 return true;
             }
@@ -76,7 +77,7 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public bool DeleteDriver(int id)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).FirstOrDefault();
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).Include(x => x.Cars).FirstOrDefault();
             if (dbEntry != null)
             {
                 appDBContext.Drivers.Remove(dbEntry);

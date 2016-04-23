@@ -2,25 +2,25 @@
     'use strict';
 
     angular
-        .module('app.cars')
-        .factory('carsApi', carsApi);
+        .module('app.drivers')
+        .factory('driversApi', driversApi);
 
-    carsApi.$inject = ['$http'];
+    driversApi.$inject = ['$http'];
 
-    function carsApi($http) {
+    function driversApi($http) {
         var service = {
-            getCars: getCars,
-            getCar: getCar,
-            addCar: addCar,
-            updateCar: updateCar,
-            deleteCar: deleteCar
+            getDrivers: getDrivers,
+            getDriver: getDriver,
+            addDriver: addDriver,
+            updateDriver: updateDriver,
+            deleteDriver: deleteDriver
         };
 
         return service;
 
-        function getCars() {
+        function getDrivers() {
             return $http({
-                url: "/api/Cars",
+                url: "/api/Drivers",
                 method: "GET",
             })
             .then(function (response) {
@@ -29,9 +29,9 @@
             .catch(console.log.bind(console));
         };
 
-        function getCar(id) {
+        function getDriver(id) {
             return $http({
-                url: "/api/Cars/" + id,
+                url: "/api/Drivers/" + id,
                 method: "GET",
             })
             .then(function (response) {
@@ -40,11 +40,11 @@
             .catch(console.log.bind(console));
         };
 
-        function addCar(car) {
+        function addDriver(driver) {
             return $http({
-                url: "/api/Cars",
+                url: "/api/Drivers",
                 method: "PUT",
-                data: car
+                data: driver
             })
             .then(function (response) {
                 return response;
@@ -52,11 +52,11 @@
             .catch(console.log.bind(console));
         };
 
-        function updateCar(car) {
+        function updateDriver(driver) {
             return $http({
-                url: "/api/Cars",
+                url: "/api/Drivers",
                 method: "POST",
-                data: car
+                data: driver
             })
             .then(function (response) {
                 return response;
@@ -64,9 +64,9 @@
             .catch(console.log.bind(console));
         };
 
-        function deleteCar(id) {
+        function deleteDriver(id) {
             return $http({
-                url: "/api/Cars/" + id,
+                url: "/api/Drivers/" + id,
                 method: "DELETE"
             })
             .then(function (response) {

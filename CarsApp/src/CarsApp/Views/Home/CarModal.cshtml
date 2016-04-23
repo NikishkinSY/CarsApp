@@ -6,7 +6,7 @@
             </div>
             <form ng-submit="cars.saveCar()" name="formAddCar">
                 <div class="modal-body">
-                    <div class="cars-filter-month row">
+                    <div>
                         <div class="col-xs-2">Year</div>
                         <div class="col-xs-4">
                             <input class="form-control" name="year" type="number" step="1" ng-model="cars.tempCar.year" required />
@@ -15,28 +15,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cars-filter-month row">
+                    <div>
                         <div class="col-xs-2">Description</div>
                         <div class="col-xs-4">
-                            <input class="form-control" name="description" type="text" step="1" ng-model="cars.tempCar.description" />
+                            <input class="form-control" name="description" type="text" ng-model="cars.tempCar.description" />
                         </div>
                     </div>
-                    @*<div class="cars-filter-category row" ng-init="cars.getCategories()">
-                        <div class="col-xs-2">Description</div>
+                    <div>
+                        <div class="col-xs-2">Driver</div>
                         <div class="col-xs-4">
-                            <select class="form-control" name="category" ng-model="expense.newExpense.category"
-                                    ng-options="category for category in expense.categories" required>
-                                <option value="">choose category</option>
+                            <select class="form-control" name="driver" ng-model="cars.tempCar.driverID" 
+                                    ng-options="driver.id as driver.name for driver in cars.drivers" required>
+                                <option></option>
                             </select>
-                            <div ng-messages="formAddExpense.category.$error">
-                                <div class="expenses-modal-error" ng-message="required">This field is required</div>
+                            <div ng-messages="formAddCar.driver.$error">
+                                <div class="cars-modal-error" ng-message="required">This field is required</div>
                             </div>
                         </div>
-                    </div>*@
+                    </div>
 
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="button" class="btn btn-danger" value="Delete" ng-click="cars.deleteCar()">
                 </div>
             </form>
         </div>

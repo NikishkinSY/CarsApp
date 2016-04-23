@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<div id="DriverModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{drivers.title}}</h4>
+            </div>
+            <form ng-submit="drivers.saveDriver()" name="formAddDriver">
+                <div class="modal-body">
+                    <div>
+                        <div class="col-xs-2">Name</div>
+                        <div class="col-xs-4">
+                            <input class="form-control" name="name" type="text" step="1" ng-model="drivers.tempDriver.name" required />
+                            <div ng-messages="formAddDriver.name.$error">
+                                <div class="cars-modal-error" ng-message="required">This field is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-xs-2">Cars</div>
+                        <div class="col-xs-8">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="car in drivers.tempDriver.cars">Year: {{car.year}}, Description: {{car.description}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="button" class="btn btn-danger" value="Delete" ng-click="drivers.deleteDriver()">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

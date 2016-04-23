@@ -5,9 +5,9 @@
         .module('app.cars')
         .controller('CarsController', Cars);
 
-    Cars.$inject = ['carsApi'];
+    Cars.$inject = ['carsApi', 'driversApi'];
 
-    function Cars(carsApi) {
+    function Cars(carsApi, driversApi) {
         var vm = this;
         vm.title = 'cars';
         vm.tempCar = {};
@@ -15,6 +15,7 @@
         vm.cars = [];
         vm.isNew = true;
         vm.title = "";
+        vm.drivers = [];
 
         vm.getCars = function () {
             carsApi.getCars()
@@ -23,16 +24,31 @@
                 });
         };
 
+        function getCar(id) {
+            carsApi.getCar(id)
+                .then(function (data) {
+                    return data;
+                });
+        };
+
         vm.addCar = function () {
             vm.title = "add car";
             vm.isNew = true;
+            vm.tempCar = {};
+            vm.tempIndex = 0;
+            vm.getDrivers();
         };
 
         vm.editCar = function (car, index) {
             vm.title = "edit car";
             vm.isNew = false;
-            vm.tempCar = car;
             vm.tempIndex = index;
+
+            carsApi.getCar(car.id)
+                .then(function (data) {
+                    vm.tempCar = data;
+                });
+            vm.getDrivers();
         };
 
         vm.saveCar = function () {
@@ -41,35 +57,35 @@
                 carsApi.addCar(vm.tempCar)
                 .then(function () {
                     vm.cars.push(vm.tempCar);
-                    refreshTemp();
-                    closeModal();
+                    CloseModal();
                 });
             }
             else
             {
                 carsApi.updateCar(vm.tempCar)
                 .then(function () {
-                    refreshTemp();
-                    closeModal();
+                    CloseModal();
                 });
             }
         };
 
-        vm.deleteCar = function (id, index) {
-            carsApi.deleteCar(id)
+        vm.deleteCar = function () {
+            carsApi.deleteCar(vm.tempCar.id)
                 .then(function () {
-                    vm.cars.splice(index, 1);
+                    vm.cars.splice(vm.tempIndex, 1);
+                    CloseModal();
                 });
         };
 
-        function closeModal() {
+        function CloseModal() {
             angular.element('#CarModal').modal('hide');
         };
 
-        function refreshTemp() {
-            vm.tempCar = {};
-            vm.tempIndex = 0;
-            vm.title = "";
+        vm.getDrivers = function () {
+            driversApi.getDrivers()
+                .then(function (data) {
+                    vm.drivers = data;
+                });
         };
     }
 })();

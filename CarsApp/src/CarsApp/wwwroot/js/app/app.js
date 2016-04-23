@@ -6,7 +6,7 @@
         'ngMessages',
         // Custom modules 
         'app.cars',
-        'app.core'
+        'app.drivers'
         // 3rd Party Modules
     ]);
 })();

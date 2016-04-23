@@ -38,6 +38,8 @@ namespace CarsApp
                 {
                     options.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
             //swager

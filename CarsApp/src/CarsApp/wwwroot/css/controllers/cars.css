@@ -2,42 +2,5 @@
 }
 
 .cars-add{
-    margin:10px 0;
 }
 
-.cars-filters{
-    margin:10px 0;
-}
-
-.cars-filter-month{
-}
-
-.cars-filter-category{
-}
-
-.cars-list{
-    margin:10px 0;
-}
-
-.cars-list-header{
-    background: #808080; 
-}
-
-.cars-list-body{
-}
-
-.cars-list-row{
-}
-
-.cars-list-row:nth-child(even) { 
-    background: #e1e1e1;
-}
-
-.cars-list-cell{
-    overflow:hidden;
-    display:inline-block;
-}
-
-.cars-modal-error{
-    color: red;
-}

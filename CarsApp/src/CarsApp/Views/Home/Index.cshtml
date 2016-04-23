@@ -3,23 +3,43 @@
 }
 
 <div class="cars" ng-controller="CarsController as cars" ng-init="cars.getCars()">
-    <input class="btn btn-primary cars-add" type="button" ng-click="cars.addCar()" data-toggle="modal" data-target="#CarModal" value="+" />
+    <input class="btn btn-primary car-add" type="button" ng-click="cars.addCar()" data-toggle="modal" data-target="#CarModal" value="+" />
 
-    <div class="cars-list">
-        <div class="cars-list-header row">
+    <div class="list">
+        <div class="list-header row">
             <b class="col-xs-3">Year</b>
             <b class="col-xs-3">Description</b>
+            <b class="col-xs-3">Edit</b>
         </div>
 
-        <div class="cars-list-body">
-            <div class="cars-list-row row" ng-repeat="car in cars.cars">
+        <div class="list-body">
+            <div class="list-row row" ng-repeat="car in cars.cars">
                 <div class="cars-list-cell col-xs-3">{{ car.year }}</div>
                 <div class="cars-list-cell col-xs-3">{{ car.description }}</div>
-                <div > <input type="button" class="btn btn-danger list-tasks-btn" ng-click="cars.editCar(car, $index)" data-toggle="modal" data-target="#CarModal" value="E" /> </div>
+                <div > <input type="button" class="btn btn-danger" ng-click="cars.editCar(car, $index)" data-toggle="modal" data-target="#CarModal" value="E" /> </div>
             </div>
         </div>
     </div>
 
     @Html.Partial("CarModal")
+</div>
+
+<div class="drivers" ng-controller="DriversController as drivers" ng-init="drivers.getDrivers()">
+    <input class="btn btn-primary drivers-add" type="button" ng-click="drivers.addDriver()" data-toggle="modal" data-target="#DriverModal" value="+" />
+
+    <div class="list">
+        <div class="list-header row">
+            <b class="col-xs-3">Name</b>
+            <b class="col-xs-3">Edit</b>
+        </div>
+
+        <div class="list-body">
+            <div class="list-row row" ng-repeat="driver in drivers.drivers">
+                <div class="list-cell col-xs-3">{{ driver.name }}</div>
+                <div> <input type="button" class="btn btn-danger" ng-click="drivers.editDriver(driver, $index)" data-toggle="modal" data-target="#DriverModal" value="E" /> </div>
+            </div>
+        </div>
+    </div>
+
     @Html.Partial("DriverModal")
 </div>
