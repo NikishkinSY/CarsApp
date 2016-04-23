@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CarsApp.Services.DataBase.Concrete;
 using Newtonsoft.Json.Serialization;
+using CarsApp.Services;
 
 namespace CarsApp
 {
@@ -30,11 +31,14 @@ namespace CarsApp
         {
             // Add framework services.
             //add mvc with camelCase json
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver =
-                    new CamelCasePropertyNamesContractResolver();
-            });
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new CustomExceptionFilter());
+                }).AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver();
+                });
 
             //swager
             services.AddSwaggerGen();
@@ -48,7 +52,7 @@ namespace CarsApp
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            
             app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
@@ -60,6 +64,7 @@ namespace CarsApp
                     template: "{controller}/{action}/{id?}");
             });
 
+            //init
             app.UseSwaggerUi();
             app.UseSwaggerGen();
         }

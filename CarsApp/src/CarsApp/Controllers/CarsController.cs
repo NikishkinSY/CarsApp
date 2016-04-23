@@ -5,46 +5,49 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using CarsApp.Services.DataBase.Concrete;
 using CarsApp.Services.DataBase.Entities;
+using System.Web.Http;
+using System.Net;
+using System.Net.Http;
 
 namespace CarsApp.Controllers
 {
     [Route("api/[controller]")]
     public class CarsController : Controller
     {
-        IRepository repository { get; set; }
+        private IRepository repository { get; set; }
         public CarsController(IRepository repository)
         {
             this.repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<Car> Get()
+        public async Task<IEnumerable<Car>> Get()
         {
-            return repository.GetCars();
+            return await Task.Run(() => { return repository.GetCars(); });
         }
 
         [HttpGet("{id}")]
-        public Car Get(int id)
+        public async Task<Car> Get(int id)
         {
-            return repository.GetCar(id);
+            return await Task.Run(() => { return repository.GetCar(id); });
         }
 
         [HttpPut]
-        public void Put([FromBody]Car car)
+        public async Task Put([FromBody]Car car)
         {
-            repository.AddCar(car);
+            await Task.Run(() => { repository.AddCar(car); });
         }
 
         [HttpPost]
-        public void Post([FromBody]Car car)
+        public async Task Post([FromBody]Car car)
         {
-            repository.UpdateCar(car);
+            await Task.Run(() => { repository.UpdateCar(car); });
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            repository.DeleteCar(id);
+            await Task.Run(() => { repository.DeleteCar(id); });
         }
     }
 }

@@ -20,21 +20,31 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public Car GetCar(int id)
         {
-            return appDBContext.Cars.Where(x => x.ID == id).First();
+            return appDBContext.Cars.Where(x => x.ID == id).FirstOrDefault();
         }
-        public void UpdateCar(Car car)
+        public bool UpdateCar(Car car)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).First();
-            dbEntry.Driver = car.Driver;
-            dbEntry.Year = car.Year;
-            dbEntry.Description = car.Description;
-            appDBContext.SaveChanges();
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).FirstOrDefault();
+            if (dbEntry != null)
+            {
+                dbEntry.Driver = car.Driver;
+                dbEntry.Year = car.Year;
+                dbEntry.Description = car.Description;
+                appDBContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
-        public void DeleteCar(int id)
+        public bool DeleteCar(int id)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).First();
-            appDBContext.Cars.Remove(dbEntry);
-            appDBContext.SaveChanges();
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).FirstOrDefault();
+            if (dbEntry != null)
+            {
+                appDBContext.Cars.Remove(dbEntry);
+                appDBContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
 
@@ -50,20 +60,30 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public Driver GetDriver(int id)
         {
-            return appDBContext.Drivers.Where(x => x.ID == id).First();
+            return appDBContext.Drivers.Where(x => x.ID == id).FirstOrDefault();
         }
-        public void UpdateDriver(Driver driver)
+        public bool UpdateDriver(Driver driver)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).First();
-            dbEntry.Name = driver.Name;
-            dbEntry.Cars = driver.Cars;
-            appDBContext.SaveChanges();
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).FirstOrDefault();
+            if (dbEntry != null)
+            {
+                dbEntry.Name = driver.Name;
+                dbEntry.Cars = driver.Cars;
+                appDBContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
-        public void DeleteDriver(int id)
+        public bool DeleteDriver(int id)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).First();
-            appDBContext.Drivers.Remove(dbEntry);
-            appDBContext.SaveChanges();
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).FirstOrDefault();
+            if (dbEntry != null)
+            {
+                appDBContext.Drivers.Remove(dbEntry);
+                appDBContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

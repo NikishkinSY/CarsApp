@@ -8,13 +8,13 @@ namespace CarsApp.Services.DataBase.Concrete
         IEnumerable<Car> GetCars();
         void AddCar(Car car);
         Car GetCar(int id);
-        void UpdateCar(Car car);
-        void DeleteCar(int id);
+        bool UpdateCar(Car car);
+        bool DeleteCar(int id);
         
         IEnumerable<Driver> GetDrivers();
         void AddDriver(Driver driver);
         Driver GetDriver(int id);
-        void UpdateDriver(Driver driver);
-        void DeleteDriver(int id);
+        bool UpdateDriver(Driver driver);
+        bool DeleteDriver(int id);
     }
 }

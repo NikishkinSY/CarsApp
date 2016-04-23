@@ -4,5 +4,10 @@
         <name>CarsApp</name>
     </assembly>
     <members>
+        <member name="T:CarsApp.Services.CustomExceptionFilter">
+            <summary>
+            Catch all exceptions and log them.
+            </summary>
+        </member>
     </members>
 </doc>

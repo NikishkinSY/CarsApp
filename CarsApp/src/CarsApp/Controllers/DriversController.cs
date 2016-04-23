@@ -13,40 +13,40 @@ namespace CarsApp.Controllers
     [Route("api/[controller]")]
     public class DriversController : Controller
     {
-        IRepository repository { get; set; }
+        private IRepository repository { get; set; }
         public DriversController(IRepository repository)
         {
             this.repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<Driver> Get()
+        public async Task<IEnumerable<Driver>> Get()
         {
-            return repository.GetDrivers();
+            return await Task.Run(() => { return repository.GetDrivers(); });
         }
 
         [HttpGet("{id}")]
-        public Driver Get(int id)
+        public async Task<Driver> Get(int id)
         {
-            return repository.GetDriver(id);
+            return await Task.Run(() => { return repository.GetDriver(id); });
         }
         
         [HttpPost]
-        public void Update([FromBody]Driver driver)
+        public async Task Update([FromBody]Driver driver)
         {
-            repository.UpdateDriver(driver);
+            await Task.Run(() => { repository.UpdateDriver(driver); });
         }
 
         [HttpPut]
-        public void Put([FromBody]Driver driver)
+        public async Task Put([FromBody]Driver driver)
         {
-            repository.AddDriver(driver);
+            await Task.Run(() => { repository.AddDriver(driver); });
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            repository.DeleteDriver(id);
+            await Task.Run(() => { repository.DeleteDriver(id); });
         }
     }
 }
