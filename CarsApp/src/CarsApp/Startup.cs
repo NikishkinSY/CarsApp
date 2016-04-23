@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CarsApp.Services.DataBase.Concrete;
+using Newtonsoft.Json.Serialization;
 
 namespace CarsApp
 {
@@ -28,7 +29,12 @@ namespace CarsApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            //add mvc with camelCase json
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver =
+                    new CamelCasePropertyNamesContractResolver();
+            });
 
             //swager
             services.AddSwaggerGen();
@@ -51,7 +57,7 @@ namespace CarsApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "api/{controller}/{action}/{id?}");
+                    template: "{controller}/{action}/{id?}");
             });
 
             app.UseSwaggerUi();

@@ -11,7 +11,7 @@ namespace CarsApp.Services.DataBase.Concrete
 
         public IEnumerable<Car> GetCars()
         {
-            return appDBContext.Cars;
+            return appDBContext.Cars.ToList();
         }
         public void AddCar(Car car)
         {

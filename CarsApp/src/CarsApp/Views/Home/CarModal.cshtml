@@ -1,0 +1,44 @@
+﻿<div id="CarModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >{{cars.title}}</h4>
+            </div>
+            <form ng-submit="cars.saveCar()" name="formAddCar">
+                <div class="modal-body">
+                    <div class="cars-filter-month row">
+                        <div class="col-xs-2">Year</div>
+                        <div class="col-xs-4">
+                            <input class="form-control" name="year" type="number" step="1" ng-model="cars.tempCar.year" required />
+                            <div ng-messages="formAddCar.year.$error">
+                                <div class="cars-modal-error" ng-message="required">This field is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cars-filter-month row">
+                        <div class="col-xs-2">Description</div>
+                        <div class="col-xs-4">
+                            <input class="form-control" name="description" type="text" step="1" ng-model="cars.tempCar.description" />
+                        </div>
+                    </div>
+                    @*<div class="cars-filter-category row" ng-init="cars.getCategories()">
+                        <div class="col-xs-2">Description</div>
+                        <div class="col-xs-4">
+                            <select class="form-control" name="category" ng-model="expense.newExpense.category"
+                                    ng-options="category for category in expense.categories" required>
+                                <option value="">choose category</option>
+                            </select>
+                            <div ng-messages="formAddExpense.category.$error">
+                                <div class="expenses-modal-error" ng-message="required">This field is required</div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
