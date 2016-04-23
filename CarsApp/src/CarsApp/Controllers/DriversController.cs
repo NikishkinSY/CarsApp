@@ -25,25 +25,25 @@ namespace CarsApp.Controllers
             return repository.GetDrivers();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public Driver Get(int id)
         {
             return repository.GetDriver(id);
         }
-
-        [HttpPost]
-        public void Insert([FromBody]Driver driver)
-        {
-            repository.AddDriver(driver);
-        }
-
+        
         [HttpPost]
         public void Update([FromBody]Driver driver)
         {
             repository.UpdateDriver(driver);
         }
 
-        [HttpPost]
+        [HttpPut]
+        public void Put([FromBody]Driver driver)
+        {
+            repository.AddDriver(driver);
+        }
+
+        [HttpDelete("{id}")]
         public void Delete(int id)
         {
             repository.DeleteDriver(id);

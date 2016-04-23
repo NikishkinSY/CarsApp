@@ -8,6 +8,7 @@ using CarsApp.Services.DataBase.Entities;
 
 namespace CarsApp.Controllers
 {
+    [Route("api/[controller]")]
     public class CarsController : Controller
     {
         IRepository repository { get; set; }
@@ -15,32 +16,32 @@ namespace CarsApp.Controllers
         {
             this.repository = repository;
         }
-        
+
         [HttpGet]
         public IEnumerable<Car> Get()
         {
             return repository.GetCars();
         }
-        
-        [HttpGet]
+
+        [HttpGet("{id}")]
         public Car Get(int id)
         {
             return repository.GetCar(id);
         }
 
-        [HttpPost]
-        public void Insert([FromBody]Car car)
+        [HttpPut]
+        public void Put([FromBody]Car car)
         {
             repository.AddCar(car);
         }
 
         [HttpPost]
-        public void Update([FromBody]Car car)
+        public void Post([FromBody]Car car)
         {
             repository.UpdateCar(car);
         }
-        
-        [HttpPost]
+
+        [HttpDelete("{id}")]
         public void Delete(int id)
         {
             repository.DeleteCar(id);

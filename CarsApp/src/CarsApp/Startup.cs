@@ -23,12 +23,15 @@ namespace CarsApp
         }
 
         public IConfigurationRoot Configuration { get; set; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc();
+
+            //swager
+            services.AddSwaggerGen();
 
             //DI
             services.AddTransient<IRepository, Repository>();
@@ -48,8 +51,11 @@ namespace CarsApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "api/{controller}/{action}/{id?}");
             });
+
+            app.UseSwaggerUi();
+            app.UseSwaggerGen();
         }
 
         // Entry point for the application.
