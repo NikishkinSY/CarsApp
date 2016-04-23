@@ -5,9 +5,9 @@
         .module('app.drivers')
         .controller('DriversController', Drivers);
 
-    Drivers.$inject = ['driversApi'];
+    Drivers.$inject = ['driversApi', 'common'];
 
-    function Drivers(driversApi) {
+    function Drivers(driversApi, common) {
         var vm = this;
         vm.title = 'cars';
         vm.tempDriver = {};
@@ -61,6 +61,7 @@
             driversApi.deleteDriver(vm.tempDriver.id)
                 .then(function () {
                     vm.drivers.splice(vm.tempIndex, 1);
+                    common.getCars();
                     CloseModal();
                 });
         };

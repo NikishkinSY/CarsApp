@@ -5,9 +5,9 @@
         .module('app.cars')
         .controller('CarsController', Cars);
 
-    Cars.$inject = ['carsApi', 'driversApi'];
+    Cars.$inject = ['carsApi', 'driversApi', 'common'];
 
-    function Cars(carsApi, driversApi) {
+    function Cars(carsApi, driversApi, common) {
         var vm = this;
         vm.title = 'cars';
         vm.tempCar = {};
@@ -16,8 +16,8 @@
         vm.isNew = true;
         vm.title = "";
         vm.drivers = [];
-
-        vm.getCars = function () {
+        
+        common.getCars = vm.getCars = function () {
             carsApi.getCars()
                 .then(function (data) {
                     vm.cars = data;
