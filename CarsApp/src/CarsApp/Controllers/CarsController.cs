@@ -33,15 +33,15 @@ namespace CarsApp.Controllers
         }
 
         [HttpPut]
-        public async Task Put([FromBody]Car car)
+        public async Task<Car> Put([FromBody]Car car)
         {
-            await Task.Run(() => { repository.AddCar(car); });
+            return await Task.Run(() => { return repository.AddCar(car); });
         }
 
         [HttpPost]
-        public async Task Post([FromBody]Car car)
+        public async Task<Car> Post([FromBody]Car car)
         {
-            await Task.Run(() => { repository.UpdateCar(car); });
+            return await Task.Run(() => { return repository.UpdateCar(car); });
         }
 
         [HttpDelete("{id}")]

@@ -1,13 +1,23 @@
 ﻿body{
+    display: flex;
+    justify-content:center;
+    flex-direction: row;
 }
 
-.middle-position{
-    margin:auto;
-    width:300px;
+.drivers{
+    width:400px;
+    margin:20px;
 }
 
-.list-add{
-    margin:10px 0;
+.drivers-add{
+}
+
+.cars{
+    width:400px;
+    padding:20px;
+}
+
+.cars-add{
 }
 
 .list{
@@ -15,7 +25,23 @@
 }
 
 .list-header{
-    background: #808080; 
+    background: #808080;
+    border-top-right-radius:5px;
+    border-top-left-radius:5px;
+}
+
+.list-cell-header{
+}
+
+.list-cell-header-label{
+    font-weight: bold;
+    color: black; 
+    margin:10px 0 0 0;
+}
+
+.list-cell-header-filter{
+    height:2em;
+    margin:0 0 10px 0;
 }
 
 .list-body{
@@ -44,4 +70,8 @@
 
 .modal-row{
     margin:10px 0;
+}
+
+.modal-row-car-description{
+    overflow:hidden;
 }

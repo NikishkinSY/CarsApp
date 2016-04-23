@@ -5,11 +5,12 @@
         .module('app.drivers')
         .controller('DriversController', Drivers);
 
-    Drivers.$inject = ['driversApi', 'common'];
+    Drivers.$inject = ['driversApi', 'common', '$scope'];
 
-    function Drivers(driversApi, common) {
+    function Drivers(driversApi, common, $scope) {
         var vm = this;
         vm.title = 'cars';
+        vm.editDriver = {};
         vm.tempDriver = {};
         vm.tempIndex = 0;
         vm.drivers = [];
@@ -30,11 +31,12 @@
             vm.tempIndex = 0;
         };
 
-        vm.editDriver = function (driver, index) {
+        //vm in ng-repeat not working! (we use scope)
+        $scope.editDriver = function (driver, index) {
             vm.title = "edit driver";
             vm.isNew = false;
             vm.tempIndex = index;
-
+            vm.editDriver = driver;
             driversApi.getDriver(driver.id)
                 .then(function (data) {
                     vm.tempDriver = data;
@@ -52,6 +54,7 @@
             else {
                 driversApi.updateDriver(vm.tempDriver)
                 .then(function () {
+                    vm.editDriver = vm.tempDriver;
                     CloseModal();
                 });
             }

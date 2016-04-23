@@ -1,0 +1,22 @@
+﻿<div class="drivers" ng-controller="DriversController as drivers" ng-init="drivers.getDrivers()">
+    <h4>Drivers</h4>
+    <input class="btn btn-primary drivers-add" type="button" ng-click="drivers.addDriver()" data-toggle="modal" data-target="#DriverModal" value="+" />
+
+    <div class="list">
+        <div class="list-header row">
+            <div class="col-xs-3">
+                <div class="list-cell-header-label" href="" ng-click="sortPredicateDriver = 'name'; reverse=!reverse">Name</div>
+                <input class="form-control list-cell-header-filter" type="text" ng-model="searchParamDriver.name" />
+            </div>
+        </div>
+
+        <div class="list-body">
+            <div class="list-row row" ng-repeat="driver in drivers.drivers | orderBy:sortPredicateDriver:reverse | filter: searchParamDriver">
+                <div class="list-cell col-xs-9">{{ driver.name }}</div>
+                <div class="list-cell col-xs-2 list-edit-button"> <input type="button" class="btn btn-danger" ng-click="editDriver(driver, $index)" data-toggle="modal" data-target="#DriverModal" value="E" /> </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("DriverModal")
+</div>

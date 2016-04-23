@@ -1,0 +1,31 @@
+﻿<div class="cars" ng-controller="CarsController as cars" ng-init="cars.getCars()">
+    <h4>Cars</h4>
+    <input class="btn btn-primary car-add" type="button" ng-click="cars.addCar()" data-toggle="modal" data-target="#CarModal" value="+" />
+
+    <div class="list">
+        <div class="list-header row">
+            <div class="col-xs-3">
+                <div class="list-cell-header-label" href="" ng-click="sortPredicateCar = 'year'; reverse=!reverse">Year</div>
+                <input class="form-control list-cell-header-filter" type="text" ng-model="searchParamCar.year" />
+            </div>
+            <div class="col-xs-3">
+                <div class="list-cell-header-label" href="" ng-click="sortPredicateCar = 'description'; reverse=!reverse">Description</div>
+                <input class="form-control list-cell-header-filter" type="text" ng-model="searchParamCar.description" />
+            </div>
+            <div class="col-xs-3">
+                <div class="list-cell-header-label" href="" ng-click="sortPredicateCar = 'driver.name'; reverse=!reverse">Driver</div>
+                <input class="form-control list-cell-header-filter" type="text" ng-model="searchParamCar.driver.name" />
+            </div>
+        </div>
+        <div class="list-body">
+            <div class="list-row row" ng-repeat="car in cars.cars | orderBy:sortPredicateCar:reverse | filter: searchParamCar">
+                <div class="list-cell col-xs-3">{{ car.year }}</div>
+                <div class="list-cell col-xs-3">{{ car.description }}</div>
+                <div class="list-cell col-xs-3">{{ car.driver.name }}</div>
+                <div class="list-cell col-xs-2 list-edit-button"> <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#CarModal" ng-click="editCar(car, $index)" value="E" /> </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("CarModal")
+</div>

@@ -15,38 +15,34 @@ namespace CarsApp.Services.DataBase.Concrete
             var cars = appDBContext.Cars.Include(x => x.Driver).ToList();
             return cars;
         }
-        public void AddCar(Car car)
+        public Car AddCar(Car car)
         {
             appDBContext.Cars.Add(car);
             appDBContext.SaveChanges();
+
+            car.Driver = GetDriver(car.DriverID);
+            return car;
         }
         public Car GetCar(int id)
         {
-            return appDBContext.Cars.Where(x => x.ID == id).Include(x => x.Driver).FirstOrDefault();
+            return appDBContext.Cars.Where(x => x.ID == id).Include(x => x.Driver).First();
         }
-        public bool UpdateCar(Car car)
+        public Car UpdateCar(Car car)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).Include(x => x.Driver).FirstOrDefault();
-            if (dbEntry != null)
-            {
-                dbEntry.DriverID = car.DriverID;
-                dbEntry.Year = car.Year;
-                dbEntry.Description = car.Description;
-                appDBContext.SaveChanges();
-                return true;
-            }
-            return false;
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == car.ID).Include(x => x.Driver).First();
+            dbEntry.DriverID = car.DriverID;
+            dbEntry.Year = car.Year;
+            dbEntry.Description = car.Description;
+            appDBContext.SaveChanges();
+
+            car.Driver = GetDriver(car.DriverID);
+            return car;
         }
-        public bool DeleteCar(int id)
+        public void DeleteCar(int id)
         {
-            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).Include(x => x.Driver).FirstOrDefault();
-            if (dbEntry != null)
-            {
-                appDBContext.Cars.Remove(dbEntry);
-                appDBContext.SaveChanges();
-                return true;
-            }
-            return false;
+            Car dbEntry = appDBContext.Cars.Where(x => x.ID == id).First();
+            appDBContext.Cars.Remove(dbEntry);
+            appDBContext.SaveChanges();
         }
 
 
@@ -62,29 +58,19 @@ namespace CarsApp.Services.DataBase.Concrete
         }
         public Driver GetDriver(int id)
         {
-            return appDBContext.Drivers.Where(x => x.ID == id).Include(x => x.Cars).FirstOrDefault();
+            return appDBContext.Drivers.Where(x => x.ID == id).Include(x => x.Cars).First();
         }
-        public bool UpdateDriver(Driver driver)
+        public void UpdateDriver(Driver driver)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).Include(x => x.Cars).FirstOrDefault();
-            if (dbEntry != null)
-            {
-                dbEntry.Name = driver.Name;
-                appDBContext.SaveChanges();
-                return true;
-            }
-            return false;
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == driver.ID).Include(x => x.Cars).First();
+            dbEntry.Name = driver.Name;
+            appDBContext.SaveChanges();
         }
-        public bool DeleteDriver(int id)
+        public void DeleteDriver(int id)
         {
-            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).Include(x => x.Cars).FirstOrDefault();
-            if (dbEntry != null)
-            {
-                appDBContext.Drivers.Remove(dbEntry);
-                appDBContext.SaveChanges();
-                return true;
-            }
-            return false;
+            Driver dbEntry = appDBContext.Drivers.Where(x => x.ID == id).First();
+            appDBContext.Drivers.Remove(dbEntry);
+            appDBContext.SaveChanges();
         }
     }
 }

@@ -5,9 +5,9 @@
         .module('app.cars')
         .controller('CarsController', Cars);
 
-    Cars.$inject = ['carsApi', 'driversApi', 'common'];
+    Cars.$inject = ['carsApi', 'driversApi', 'common', '$scope'];
 
-    function Cars(carsApi, driversApi, common) {
+    function Cars(carsApi, driversApi, common, $scope) {
         var vm = this;
         vm.title = 'cars';
         vm.tempCar = {};
@@ -19,15 +19,15 @@
         
         common.getCars = vm.getCars = function () {
             carsApi.getCars()
-                .then(function (data) {
-                    vm.cars = data;
+                .then(function (result) {
+                    vm.cars = result;
                 });
         };
 
         function getCar(id) {
             carsApi.getCar(id)
-                .then(function (data) {
-                    return data;
+                .then(function (result) {
+                    return result;
                 });
         };
 
@@ -39,15 +39,12 @@
             vm.getDrivers();
         };
 
-        vm.editCar = function (car, index) {
+        //vm in ng-repeat not working! (we use scope)
+        $scope.editCar = function (car, index) {
             vm.title = "edit car";
             vm.isNew = false;
             vm.tempIndex = index;
-
-            carsApi.getCar(car.id)
-                .then(function (data) {
-                    vm.tempCar = data;
-                });
+            vm.tempCar = car;
             vm.getDrivers();
         };
 
@@ -55,7 +52,8 @@
             if (vm.isNew)
             {
                 carsApi.addCar(vm.tempCar)
-                .then(function () {
+                .then(function (result) {
+                    vm.tempCar.driver = result.data.driver;
                     vm.cars.push(vm.tempCar);
                     CloseModal();
                 });
@@ -63,7 +61,8 @@
             else
             {
                 carsApi.updateCar(vm.tempCar)
-                .then(function () {
+                .then(function (result) {
+                    vm.tempCar.driver = result.data.driver;
                     CloseModal();
                 });
             }
@@ -83,8 +82,8 @@
 
         vm.getDrivers = function () {
             driversApi.getDrivers()
-                .then(function (data) {
-                    vm.drivers = data;
+                .then(function (result) {
+                    vm.drivers = result;
                 });
         };
     }
