@@ -19,15 +19,15 @@
         
         common.getCars = vm.getCars = function () {
             carsApi.getCars()
-                .then(function (result) {
-                    vm.cars = result;
+                .then(function (data) {
+                    vm.cars = data;
                 });
         };
 
         function getCar(id) {
             carsApi.getCar(id)
-                .then(function (result) {
-                    return result;
+                .then(function (data) {
+                    return data;
                 });
         };
 
@@ -44,7 +44,7 @@
             vm.title = "edit car";
             vm.isNew = false;
             vm.tempIndex = index;
-            vm.tempCar = car;
+            common.copyProperties(car, vm.tempCar);
             vm.getDrivers();
         };
 
@@ -52,17 +52,16 @@
             if (vm.isNew)
             {
                 carsApi.addCar(vm.tempCar)
-                .then(function (result) {
-                    vm.tempCar.driver = result.data.driver;
-                    vm.cars.push(vm.tempCar);
+                .then(function (data) {
+                    vm.cars.push(data);
                     CloseModal();
                 });
             }
             else
             {
                 carsApi.updateCar(vm.tempCar)
-                .then(function (result) {
-                    vm.tempCar.driver = result.data.driver;
+                .then(function (data) {
+                    common.copyProperties(data, vm.cars[vm.tempIndex]);
                     CloseModal();
                 });
             }
@@ -82,8 +81,8 @@
 
         vm.getDrivers = function () {
             driversApi.getDrivers()
-                .then(function (result) {
-                    vm.drivers = result;
+                .then(function (data) {
+                    vm.drivers = data;
                 });
         };
     }

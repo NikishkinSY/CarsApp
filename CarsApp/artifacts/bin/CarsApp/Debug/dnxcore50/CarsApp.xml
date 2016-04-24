@@ -9,5 +9,69 @@
             Catch all exceptions and log them.
             </summary>
         </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.GetCars">
+            <summary>
+            get all cars
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.AddCar(CarsApp.Services.DataBase.Entities.Car)">
+            <summary>
+            add car to repository
+            </summary>
+            <param name="car"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.GetCar(System.Int32)">
+            <summary>
+            get specific car
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.UpdateCar(CarsApp.Services.DataBase.Entities.Car)">
+            <summary>
+            update car
+            </summary>
+            <param name="car"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.DeleteCar(System.Int32)">
+            <summary>
+            delete car
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.GetDrivers">
+            <summary>
+            get all drivers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.AddDriver(CarsApp.Services.DataBase.Entities.Driver)">
+            <summary>
+            add driver
+            </summary>
+            <param name="driver"></param>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.GetDriver(System.Int32)">
+            <summary>
+            get specific driver
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.UpdateDriver(CarsApp.Services.DataBase.Entities.Driver)">
+            <summary>
+            update driver
+            </summary>
+            <param name="driver"></param>
+        </member>
+        <member name="M:CarsApp.Services.DataBase.Concrete.Repository.DeleteDriver(System.Int32)">
+            <summary>
+            delete driver
+            </summary>
+            <param name="id"></param>
+        </member>
     </members>
 </doc>

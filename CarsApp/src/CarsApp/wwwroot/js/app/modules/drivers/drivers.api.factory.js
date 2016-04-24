@@ -47,7 +47,7 @@
                 data: driver
             })
             .then(function (response) {
-                return response;
+                return response.data;
             })
             .catch(console.log.bind(console));
         };
@@ -59,7 +59,7 @@
                 data: driver
             })
             .then(function (response) {
-                return response;
+                return response.data;
             })
             .catch(console.log.bind(console));
         };
@@ -70,7 +70,7 @@
                 method: "DELETE"
             })
             .then(function (response) {
-                return response;
+                return response.data;
             })
             .catch(console.log.bind(console));
         };

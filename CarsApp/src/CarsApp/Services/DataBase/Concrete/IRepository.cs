@@ -12,9 +12,9 @@ namespace CarsApp.Services.DataBase.Concrete
         void DeleteCar(int id);
         
         IEnumerable<Driver> GetDrivers();
-        void AddDriver(Driver driver);
+        Driver AddDriver(Driver driver);
         Driver GetDriver(int id);
-        void UpdateDriver(Driver driver);
+        Driver UpdateDriver(Driver driver);
         void DeleteDriver(int id);
     }
 }

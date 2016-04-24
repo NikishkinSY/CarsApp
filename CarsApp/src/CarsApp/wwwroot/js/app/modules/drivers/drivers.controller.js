@@ -36,25 +36,25 @@
             vm.title = "edit driver";
             vm.isNew = false;
             vm.tempIndex = index;
-            vm.editDriver = driver;
+            common.copyProperties(driver, vm.tempDriver);
             driversApi.getDriver(driver.id)
                 .then(function (data) {
-                    vm.tempDriver = data;
+                    vm.tempDriver.cars = data.cars;
                 });
         };
 
         vm.saveDriver = function () {
             if (vm.isNew) {
                 driversApi.addDriver(vm.tempDriver)
-                .then(function () {
-                    vm.drivers.push(vm.tempDriver);
+                .then(function (data) {
+                    vm.drivers.push(data);
                     CloseModal();
                 });
             }
             else {
                 driversApi.updateDriver(vm.tempDriver)
-                .then(function () {
-                    vm.editDriver = vm.tempDriver;
+                .then(function (data) {
+                    common.copyProperties(data, vm.drivers[vm.tempIndex]);
                     CloseModal();
                 });
             }

@@ -11,7 +11,7 @@ using CarsApp.Services.DataBase.Concrete;
 namespace CarsApp.Controllers
 {
     [Route("api/[controller]")]
-    public class DriversController : Controller
+    public class DriversController : Controller, IController<Driver>
     {
         private IRepository repository { get; set; }
         public DriversController(IRepository repository)
@@ -32,15 +32,15 @@ namespace CarsApp.Controllers
         }
         
         [HttpPost]
-        public async Task Update([FromBody]Driver driver)
+        public async Task<Driver> Post([FromBody]Driver driver)
         {
-            await Task.Run(() => { repository.UpdateDriver(driver); });
+            return await Task.Run(() => { return repository.UpdateDriver(driver); });
         }
 
         [HttpPut]
-        public async Task Put([FromBody]Driver driver)
+        public async Task<Driver> Put([FromBody]Driver driver)
         {
-            await Task.Run(() => { repository.AddDriver(driver); });
+            return await Task.Run(() => { return repository.AddDriver(driver); });
         }
 
         [HttpDelete("{id}")]

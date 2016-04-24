@@ -8,12 +8,19 @@
     Common.$inject = [];
 
     function Common() {
-        var getCars;
         var service = {
-            getCars: getCars
+            getCars: getCars,
+            copyProperties: copyProperties
         };
 
         return service;
 
+        var getCars;
+
+        //copy properties (map)
+        function copyProperties (src, dst) {
+            for (var propety in src)
+                dst[propety] = src[propety];
+        };
     }
 })();

@@ -12,7 +12,7 @@ using System.Net.Http;
 namespace CarsApp.Controllers
 {
     [Route("api/[controller]")]
-    public class CarsController : Controller
+    public class CarsController : Controller, IController<Car>
     {
         private IRepository repository { get; set; }
         public CarsController(IRepository repository)
