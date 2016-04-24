@@ -22,9 +22,5 @@ namespace CarsApp.Services.DataBase.Concrete
         {
             optionsBuilder.UseSqlServer(Startup.Configuration["Data:DefaultConnection:ConnectionString"]);
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-        }
     }
 }

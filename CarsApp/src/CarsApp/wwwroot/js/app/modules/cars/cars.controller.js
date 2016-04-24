@@ -1,6 +1,7 @@
 ﻿(function () {
     'use strict';
 
+    //controller for cars part front-end
     angular
         .module('app.cars')
         .controller('CarsController', Cars);
@@ -17,6 +18,7 @@
         vm.title = "";
         vm.drivers = [];
         
+        //get cars, also enable this reference in common module
         common.getCars = vm.getCars = function () {
             carsApi.getCars()
                 .then(function (data) {
@@ -24,13 +26,7 @@
                 });
         };
 
-        function getCar(id) {
-            carsApi.getCar(id)
-                .then(function (data) {
-                    return data;
-                });
-        };
-
+        //after click add button
         vm.addCar = function () {
             vm.title = "add car";
             vm.isNew = true;
@@ -39,6 +35,7 @@
             vm.getDrivers();
         };
 
+        //after click edit button
         //vm in ng-repeat not working! (we use scope)
         $scope.editCar = function (car, index) {
             vm.title = "edit car";
@@ -48,6 +45,7 @@
             vm.getDrivers();
         };
 
+        //add or update item
         vm.saveCar = function () {
             if (vm.isNew)
             {
@@ -67,6 +65,7 @@
             }
         };
 
+        //delete item
         vm.deleteCar = function () {
             carsApi.deleteCar(vm.tempCar.id)
                 .then(function () {
@@ -75,10 +74,12 @@
                 });
         };
 
+        //close modal window
         function CloseModal() {
             angular.element('#CarModal').modal('hide');
         };
 
+        //get all drivers via drivers api factory
         vm.getDrivers = function () {
             driversApi.getDrivers()
                 .then(function (data) {

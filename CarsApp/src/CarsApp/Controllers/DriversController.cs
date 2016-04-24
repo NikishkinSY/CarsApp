@@ -18,13 +18,13 @@ namespace CarsApp.Controllers
         {
             this.repository = repository;
         }
-
+        
         [HttpGet]
         public async Task<IEnumerable<Driver>> Get()
         {
             return await Task.Run(() => { return repository.GetDrivers(); });
         }
-
+        
         [HttpGet("{id}")]
         public async Task<Driver> Get(int id)
         {

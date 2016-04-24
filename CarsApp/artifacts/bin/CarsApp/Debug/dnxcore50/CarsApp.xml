@@ -6,7 +6,7 @@
     <members>
         <member name="T:CarsApp.Services.CustomExceptionFilter">
             <summary>
-            Catch all exceptions and log them.
+            catch all exceptions and log them.
             </summary>
         </member>
         <member name="M:CarsApp.Services.DataBase.Concrete.Repository.GetCars">

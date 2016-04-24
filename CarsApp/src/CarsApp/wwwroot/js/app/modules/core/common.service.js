@@ -15,6 +15,7 @@
 
         return service;
 
+        //function refresh list of cars
         var getCars;
 
         //copy properties (map)

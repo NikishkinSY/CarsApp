@@ -1,6 +1,7 @@
 ﻿(function () {
     'use strict';
 
+    //controller for drivers part front-end
     angular
         .module('app.drivers')
         .controller('DriversController', Drivers);
@@ -24,6 +25,7 @@
                 });
         };
 
+        //after click add button
         vm.addDriver = function () {
             vm.title = "add driver";
             vm.isNew = true;
@@ -31,6 +33,7 @@
             vm.tempIndex = 0;
         };
 
+        //after click edit button
         //vm in ng-repeat not working! (we use scope)
         $scope.editDriver = function (driver, index) {
             vm.title = "edit driver";
@@ -43,6 +46,7 @@
                 });
         };
 
+        //add or update item
         vm.saveDriver = function () {
             if (vm.isNew) {
                 driversApi.addDriver(vm.tempDriver)
@@ -60,6 +64,7 @@
             }
         };
 
+        //delete item
         vm.deleteDriver = function () {
             driversApi.deleteDriver(vm.tempDriver.id)
                 .then(function () {
@@ -69,6 +74,7 @@
                 });
         };
 
+        //close modal window
         function CloseModal() {
             angular.element('#DriverModal').modal('hide');
         };

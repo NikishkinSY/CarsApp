@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CarsApp.Services
 {
     /// <summary>
-    /// Catch all exceptions and log them.
+    /// catch all exceptions and log them.
     /// </summary>
     public class CustomExceptionFilter : ExceptionFilterAttribute
     {

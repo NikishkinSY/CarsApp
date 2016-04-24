@@ -58,6 +58,7 @@
 .list-cell{
     overflow:hidden;
     display:inline-block;
+    line-height: 30px;
 }
 
 .list-edit-button{
@@ -70,6 +71,7 @@
 
 .modal-row{
     margin:10px 0;
+    line-height: 30px;
 }
 
 .modal-row-car-description{

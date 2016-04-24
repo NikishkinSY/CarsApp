@@ -1,6 +1,8 @@
 ﻿(function () {
     'use strict';
 
+    //factory for receiving cars-data from server
+
     angular
         .module('app.cars')
         .factory('carsApi', carsApi);

@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/css/layout.css" rel="stylesheet" />
-    <link href="~/css/controllers/cars.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    
+    @*libs*@
+    <script src="~/lib/jquery/jquery-2.2.3.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular/angular-messages/angular-messages.min.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/lib/angular/angular.js"></script>
-    <script src="~/lib/angular-messages/angular-messages.js"></script>
-
-    @*custom scripts*@
+    @*custom resources*@
     <script src="~/js/app/modules/cars/module.js"></script>
     <script src="~/js/app/modules/cars/cars.controller.js"></script>
     <script src="~/js/app/modules/cars/cars.api.factory.js"></script>
@@ -27,6 +26,7 @@
     <script src="~/js/app/modules/core/common.service.js"></script>
     
     <script src="~/js/app/app.js"></script>
+    <link href="~/css/layout.css" rel="stylesheet" />
 </head>
 <body ng-app="app">
         @RenderBody()
