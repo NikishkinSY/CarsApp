@@ -27,6 +27,7 @@
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Save">
                     <input type="button" class="btn btn-danger" value="Delete"
+                        ng-disabled="drivers.isNew" ng-true-value="false" ng-false-value="true"
                         confirmed-click="drivers.deleteDriver()" ng-confirm-click="Delete this driver and all his cars?">
                 </div>
             </form>
